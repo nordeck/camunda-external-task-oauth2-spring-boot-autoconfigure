@@ -1,0 +1,8 @@
+oauth2:
+    issuer-uri: ${oauth_host}/issuer-uri
+    token-uri: ${oauth_host}/token-uri
+    client-id: some_client_id
+    client-secret: some_client_secret
+    scope: some_scope
+
+

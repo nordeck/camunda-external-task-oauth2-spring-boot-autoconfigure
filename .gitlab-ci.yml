@@ -1,0 +1,53 @@
+stages:
+  - build
+  - deploy
+  - release
+
+build:
+  stage: build
+  image: maven:3-openjdk-17
+  script:
+    "mvn clean package -B -s .m2/settings.xml"
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "develop"
+    - if: $CI_COMMIT_REF_NAME =~ "feature"
+    - if: $CI_COMMIT_REF_NAME =~ "release"
+
+deploy:
+  stage: deploy
+  image: maven:3-openjdk-17
+  script:
+    "mvn deploy -X -s .m2/settings.xml"
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "develop"
+    - if: $CI_COMMIT_REF_NAME =~ "release"
+    - if: $CI_COMMIT_REF_NAME =~ /^v\d+\.\d+(\.\d+)?$/
+
+.release-template:
+  stage: release
+  image: maven:3-openjdk-17
+  when: manual
+  script:
+    - git config user.email "runner@gitlab.nordeck.net"
+    - git config user.name "Gitlab Runner"
+    - git checkout -B "$CI_COMMIT_REF_NAME"
+
+release-develop:
+  extends:
+    - .release-template
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "develop"
+  after_script:
+    - mvn clean release:prepare release:perform -DprojectVersionPolicyId=SemVerVersionPolicy -B -s .m2/settings.xml
+
+release-release:
+  extends:
+    - .release-template
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ "release"
+  after_script:
+    - mvn clean release:prepare release:perform -B -s .m2/settings.xml
+
+
+
+
