@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+net.nordeck.camunda.oauth2.config.OAuth2ClientAutoconfiguration, \
+net.nordeck.camunda.oauth2.config.OkHttpLogbookAutoconfiguration, \
+  net.nordeck.camunda.oauth2.config.DefaultOkHttpAutoconfiguration
