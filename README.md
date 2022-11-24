@@ -7,34 +7,38 @@
 </h1>
 <h4 align="center">A library to use the OAuth2 Flow for for <a href="https://camunda.com/" target="_blank">Camunda</a>.</h4>
 
+### Key Features
 
-# Camunda external task OAuth2 extension
 Extension to connect the Camunda external task client to an OAuth2 secured Camunda REST API.
 
-## Maven coordinates
+### Maven coordinates
 
-```xml
-<dependency>
-    <groupId>net.nordeck.camunda</groupId>
-    <artifactId>camunda-external-task-oauth2-spring-boot-autoconfigure</artifactId>
-    <version>$VERSION</version>
-</dependency>
-```
+TBD
 
-## Configuration
+### How to use
+
 The extension makes use of Spring Boot autoconfiguration. Properties to set:
+
 ```yml
 oauth2:
-    issuer-uri: # e.g. https://my.keycloak.somewhere/auth/realms/camunda
-    token-uri:  # e.g. https://my.keycloak.somewhere/auth/realms/camunda/protocol/openid-connect/token
-    client-id:  # The realm's client id to use
-    client-secret: # The realm's client secret
-    scope: # The scopes to request
+  issuer-uri: # e.g. https://someUrl:8082/oauth2/default
+  token-uri:  # e.g.  http://localhost:8080/auth/oauth/token
+  client-id:  # The client id to use
+  client-secret: # The client secret
+  scope: # The scopes to request
 ```
 
-## Logging
+### Download
+
+You can download the latest version of our library from this GitHub
+repo (https://github.com/nordeck/camunda-external-task-oauth2-spring-boot-autoconfigure).
+
+### Logging
+
 To enable HTTP request / response logging via Logbook:
+
 ```xml
+
 <dependency>
     <groupId>org.zalando</groupId>
     <artifactId>logbook-spring-boot-starter</artifactId>
@@ -42,11 +46,13 @@ To enable HTTP request / response logging via Logbook:
 </dependency>
 ```
 
-See [Logbook](https://github.com/zalando/logbook).
+### How to Contribute
+
+Please take a look at our [Contribution Guidelines](https://github.com/nordeck/.github/blob/main/docs/CONTRIBUTING.md).
 
 ### License
 
 This project is licensed under [APACHE 2.0](./LICENSE).
 
 > [nordeck.net](https://nordeck.net/) &nbsp;&middot;&nbsp;
-> GitHub [Nordeck](https://github.com/nordeck/) 
+> GitHub [Nordeck](https://github.com/nordeck/)
